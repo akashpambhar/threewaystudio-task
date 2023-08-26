@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Home Page</title>
+    <title>Files Page</title>
   </head>
   <body>
     <h1>Upload new File</h1>
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" action="/files">
       <input type="file" name="file[]" multiple/>
       <input type="submit" value="Upload" />
     </form>
 
     {% if duration_exceeds == True: %}
-    <h2>Your total time exceeds 10 mins</h2>
+    <h3>Total time exceeds 10 mins</h3>
     {% endif %}
 
-    {% if file_count: %}
-    <h2>{{ file_count }}</h2>
+    {% if message: %}
+    <h3>{{ message }}</h3>
     {% endif %}
 
     <h1>Audio Files</h1>
@@ -34,7 +34,7 @@
             <td>{{ audio.name }}</td>
             <td>{{ audio.path }}</td>
             <td>{{ audio.extension }}</td>
-            <td>{{ audio.upload_at }}</td>
+            <td>{{ audio.upload_date }}</td>
             <td>{{ audio.size }}</td>
             <td>{{ audio.duration }}</td>
             <td>
@@ -42,11 +42,6 @@
                     <source src="{{ url_for('static', filename=audio.name) }}" type="audio/mpeg">
                     Your browser does not support the audio element.
                 </audio>
-            </td>
-            <td>
-                <form method="post" action="{{ url_for('delete_audio', id=audio.id) }}">
-                    <button type="submit">Delete</button>
-                </form>
             </td>
         </tr>
         {% endfor %}
