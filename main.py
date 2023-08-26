@@ -2,6 +2,7 @@ import os
 from flask import Flask, request, redirect, render_template
 from werkzeug.utils import secure_filename
 import magic
+from mutagen import File
 
 UPLOAD_FOLDER = './uploads'
 
@@ -29,6 +30,11 @@ def upload():
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         if file:
             file.save(file_path)
+            print(os.stat(path=file_path))
+            print(filename)
+            al = File(file_path).info.length
+            print(al)
+
         if "Audio" not in determine_file_type(file_path):
                 os.remove(file_path)
                 print('Not an audio file')
