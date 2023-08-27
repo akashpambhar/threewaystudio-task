@@ -26,8 +26,8 @@ Before running the application, make sure you have the following installed:
 1. Clone the repository:
 
    ```bash
-   git clone <repository_url>
-   cd <repository_directory>
+   git clone https://github.com/akashpambhar/threewaystudio-task.git
+   cd threewaystudio-task
    ```
 
 2. Install the required dependencies:
